@@ -75,6 +75,18 @@ namespace MethodApp
 
             return result;
         }
+        static void ShowArray(int[] array, bool sorted = false) 
+        {
+            var local = array;
+            if (sorted)
+            {
+                local= SortArray(array);
+            }
+            foreach (var counted in local)
+            {
+                Console.Write(counted + "/");
+            }
+        }
         static void Main(string[] args)
         {
             (string name, string[] dishes) User;
@@ -123,8 +135,8 @@ namespace MethodApp
                 Console.WriteLine(color);
             }
 
-            var array = GetArrayFromConsole();
-            var SortedArray = SortArray(array);
+            var array = GetArrayFromConsole(10);
+            SortArray(array);
                         
             Console.ReadKey();
         }
