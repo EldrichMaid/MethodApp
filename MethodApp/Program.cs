@@ -51,10 +51,15 @@ namespace MethodApp
                                   
             return result;
         }
-        static int[] SortArray(int[] result)
+        static int[] SortArray(in int[] result,out int[] sorteddesc,out int[] sortedasc)
         {         
+            sorteddesc = SortArrayDesc(result);
+            sortedasc = SortArrayAsc(result);
+            return result;
+        }
+        static int[] SortArrayAsc(int[] result)
+        {
             int Local;
-
             for (int i = 0; i < result.Length; i++)
             {
                 for (int j = i + 1; j < result.Length; j++)
@@ -67,15 +72,32 @@ namespace MethodApp
                     }
                 }
             }
-            
             return result;
         }
+        static int[] SortArrayDesc(int[] result)
+        {
+            int Local;
+            for (int i = 0; i < result.Length; i++)
+            {
+                for (int j = i + 1; j < result.Length; j++)
+                {
+                    if (result[i] < result[j])
+                    {
+                        Local = result[i];
+                        result[i] = result[j];
+                        result[j] = Local;
+                    }
+                }
+            }
+            return result;
+        }
+
         static void ShowArray(int[] array, bool sorted = false) 
         {
             var local = array;
             if (sorted)
             {
-                local= SortArray(array);
+                local = SortArray(array, out int[] sorteddesc, out int[] sortedasc);
             }
             foreach (var counted in local)
             {
@@ -137,7 +159,7 @@ namespace MethodApp
 
             int size = 6;
             var array = GetArrayFromConsole(ref size);
-            SortArray(array);
+            ShowArray(array,true);
 
             var SmalArray = new int[] { 1, 2, 3, 4, 5, 6 };
             var data = 8;
