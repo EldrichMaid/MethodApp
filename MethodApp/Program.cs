@@ -4,9 +4,9 @@ namespace MethodApp
 {
     internal class Program
     {
-        static string ShowColor(string username)
+        static string ShowColor(string ColorUser)
         {
-            Console.WriteLine("Напишите свой любимый цвет на английском с маленькой буквы");
+            Console.WriteLine("{0},напишите свой любимый цвет на английском с маленькой буквы", ColorUser);
             var color = Console.ReadLine();
             switch (color)
             {
@@ -121,7 +121,6 @@ namespace MethodApp
 
             GetArrayFromConsole();
             
-
             Console.ReadKey();
         }
     }
