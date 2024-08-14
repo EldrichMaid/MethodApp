@@ -39,9 +39,9 @@ namespace MethodApp
             }
             return color;
         }
-        static int[] GetArrayFromConsole()
+        static int[] GetArrayFromConsole(int num = 5)
         {
-            var result = new int[5];
+            var result = new int[num];
 
             for (int i = 0; i < result.Length; i++)
             {
