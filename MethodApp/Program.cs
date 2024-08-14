@@ -4,11 +4,10 @@ namespace MethodApp
 {
     internal class Program
     {
-        static void ShowColor()
+        static string ShowColor()
         {
             Console.WriteLine("Напишите свой любимый цвет на английском с маленькой буквы");
             var color = Console.ReadLine();
-
             switch (color)
             {
                 case "red":
@@ -36,7 +35,9 @@ namespace MethodApp
 
                     Console.WriteLine("Your color is yellow!");
                     break;
+                    
             }
+            return color;
         }
         static void Main(string[] args)
         {
@@ -66,6 +67,7 @@ namespace MethodApp
             Console.WriteLine("Ваш возраст: {0}", age);
 
             ShowColor();
+
             Console.ReadKey();
         }
     }
