@@ -39,7 +39,7 @@ namespace MethodApp
             }
             return color;
         }
-        static int[] GetArrayFromConsole(int num = 5)
+        static int[] GetArrayFromConsole(ref int num)
         {
             var result = new int[num];
 
@@ -67,12 +67,7 @@ namespace MethodApp
                     }
                 }
             }
-
-            foreach (var counted in result)
-            {
-                Console.Write(counted + "/");
-            }
-
+            
             return result;
         }
         static void ShowArray(int[] array, bool sorted = false) 
@@ -140,7 +135,8 @@ namespace MethodApp
                 Console.WriteLine(color);
             }
 
-            var array = GetArrayFromConsole(10);
+            int size = 6;
+            var array = GetArrayFromConsole(ref size);
             SortArray(array);
 
             var SmalArray = new int[] { 1, 2, 3, 4, 5, 6 };
