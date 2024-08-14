@@ -48,7 +48,11 @@ namespace MethodApp
                 Console.WriteLine("Введите элемент массива номер {0}", i + 1);
                 result[i] = int.Parse(Console.ReadLine());
             }
-
+                                  
+            return result;
+        }
+        static int[] SortArray(int[] result)
+        {         
             int Local;
 
             for (int i = 0; i < result.Length; i++)
@@ -66,7 +70,7 @@ namespace MethodApp
 
             foreach (var counted in result)
             {
-                Console.Write(counted+"/");
+                Console.Write(counted + "/");
             }
 
             return result;
@@ -118,8 +122,8 @@ namespace MethodApp
             {
                 Console.WriteLine(color);
             }
-
-            GetArrayFromConsole();
+            
+            SortArray(GetArrayFromConsole());
                         
             Console.ReadKey();
         }
