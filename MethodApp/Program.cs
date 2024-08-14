@@ -122,8 +122,9 @@ namespace MethodApp
             {
                 Console.WriteLine(color);
             }
-            
-            SortArray(GetArrayFromConsole());
+
+            var array = GetArrayFromConsole();
+            var SortedArray = SortArray(array);
                         
             Console.ReadKey();
         }
