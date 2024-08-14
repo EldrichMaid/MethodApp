@@ -4,7 +4,7 @@ namespace MethodApp
 {
     internal class Program
     {
-        static string ShowColor()
+        static string ShowColor(string username)
         {
             Console.WriteLine("Напишите свой любимый цвет на английском с маленькой буквы");
             var color = Console.ReadLine();
@@ -92,18 +92,26 @@ namespace MethodApp
 
             Console.Write("Введите имя: ");
             name = Console.ReadLine();
-            Console.Write("Введите возрас с цифрами:");
+            Console.Write("Введите возраст с цифрами:");
             age = Convert.ToInt32(Console.ReadLine());
 
             Console.WriteLine("Ваше имя: {0}", name);
             Console.WriteLine("Ваш возраст: {0}", age);
 
-            ShowColor();
+            (string name,int  age) ColorUser;
+            Console.Write("Введите имя:");
+            ColorUser.name = Console.ReadLine();
+            Console.Write("Введите возраст:");
+            ColorUser.age = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Ваше имя: {0}",ColorUser.name);
+            Console.WriteLine("Ваш возраст: {0}",ColorUser.age);
+
+            ShowColor(ColorUser.name);
 
             var favcolors = new string[3];
             for (int i = 0;i < favcolors.Length;i++)
             {
-                favcolors[i] = ShowColor();
+                favcolors[i] = ShowColor(ColorUser.name);
             }
             Console.WriteLine("Ваши любимые цвета");
             foreach (var color in favcolors)
@@ -112,6 +120,7 @@ namespace MethodApp
             }
 
             GetArrayFromConsole();
+            
 
             Console.ReadKey();
         }
