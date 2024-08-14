@@ -87,6 +87,11 @@ namespace MethodApp
                 Console.Write(counted + "/");
             }
         }
+
+        static void OperationIn(int[] array, in int data)
+        {
+            array[0]= data;
+        }
         static void Main(string[] args)
         {
             (string name, string[] dishes) User;
@@ -137,7 +142,11 @@ namespace MethodApp
 
             var array = GetArrayFromConsole(10);
             SortArray(array);
-                        
+
+            var SmalArray = new int[] { 1, 2, 3, 4, 5, 6 };
+            var data = 8;
+            OperationIn(SmalArray, data);
+                                   
             Console.ReadKey();
         }
     }
