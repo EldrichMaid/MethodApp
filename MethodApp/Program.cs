@@ -113,13 +113,34 @@ namespace MethodApp
         {
             array[0]= data;
         }
+        static void Echo(string saidworld, int deep)
+        {
+            var modif = saidworld;
+            if (modif.Length > 2)
+            {
+                modif = modif.Remove(0, 2);
+            }
+            Console.WriteLine("..." + modif);
+            if (deep > 1)
+            {
+                Echo(modif, deep - 1);
+            }
+        }
+        static void EchoStatic(string phrase, int deep)
+        {
+            Console.WriteLine(phrase);
+
+            if (deep > 1)
+            {
+                EchoStatic(phrase, deep - 1);
+            }
+        }
+
         static void Main(string[] args)
         {
             (string name, string[] dishes) User;
-
             Console.WriteLine("Введите имя");
             User.name = Console.ReadLine();
-
             User.dishes = new string[5];
             Console.WriteLine("Введите пять любимых блюд");
             for (int i = 0; i < User.dishes.Length; i++)
@@ -128,15 +149,12 @@ namespace MethodApp
             }
 
             var (name, age) = ("PC", 0);
-
             Console.WriteLine("Мое имя: {0}", name);
             Console.WriteLine("Мой возраст: {0}", age);
-
             Console.Write("Введите имя: ");
             name = Console.ReadLine();
             Console.Write("Введите возраст с цифрами:");
             age = Convert.ToInt32(Console.ReadLine());
-
             Console.WriteLine("Ваше имя: {0}", name);
             Console.WriteLine("Ваш возраст: {0}", age);
 
@@ -147,9 +165,7 @@ namespace MethodApp
             ColorUser.age = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Ваше имя: {0}",ColorUser.name);
             Console.WriteLine("Ваш возраст: {0}",ColorUser.age);
-
             ShowColor(ColorUser.name, ColorUser.age);
-
             var favcolors = new string[3];
             for (int i = 0;i < favcolors.Length;i++)
             {
@@ -168,7 +184,14 @@ namespace MethodApp
             var SmalArray = new int[] { 1, 2, 3, 4, 5, 6 };
             var data = 8;
             OperationIn(SmalArray, data);
-                                   
+
+            Console.WriteLine("Напишите что-то");
+            var str = Console.ReadLine();
+            Console.WriteLine("Укажите глубину эха");
+            var deep = int.Parse(Console.ReadLine());
+            EchoStatic(str, deep);
+            Echo(str, deep);
+
             Console.ReadKey();
         }
     }
