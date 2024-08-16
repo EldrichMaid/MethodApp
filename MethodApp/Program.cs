@@ -99,7 +99,6 @@ namespace MethodApp
             }
             return result;
         }
-
         static void ShowArray(int[] array, bool sorted = false)
         {
             var local = array;
@@ -108,7 +107,6 @@ namespace MethodApp
                 local = SortArray(array, out var sortedDesc, out var sortedAsc);
             }
         }
-
         static void OperationIn(int[] array, in int data)
         {
             array[0] = data;
@@ -153,6 +151,7 @@ namespace MethodApp
             return result;
         }
         private static int PowerUpBySwitch(int N, byte pow)
+
         {
             switch (pow)
             {
@@ -165,8 +164,8 @@ namespace MethodApp
                 default:
                     throw new ArgumentException("Invalid power value. Must be a byte between 0 and 255.");
             }
-
-            static void Main(string[] args)
+        }
+        static void Main(string[] args)
             {
                 (string name, string[] dishes) User;
                 Console.WriteLine("Введите имя");
@@ -229,4 +228,4 @@ namespace MethodApp
             }
         }
     }
-}
+
