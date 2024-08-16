@@ -51,11 +51,11 @@ namespace MethodApp
                                   
             return result;
         }
-        static int[] SortArray(in int[] result,out int[] sorteddesc,out int[] sortedasc)
+        static int[] SortArray(in int[] Result, out int[] sorteddesc, out int[] sortedasc)
         {         
-            sorteddesc = SortArrayDesc(result);
-            sortedasc = SortArrayAsc(result);
-            return result;
+            sorteddesc = SortArrayDesc(Result);
+            sortedasc = SortArrayAsc(Result);
+            return Result;
         }
         static int[] SortArrayAsc(int[] result)
         {
@@ -74,7 +74,7 @@ namespace MethodApp
             }
             foreach (var counted in result)
             {
-                Console.Write(counted + "/");
+                Console.Write("|" + counted + "|");
             }
             return result;
         }
@@ -85,7 +85,7 @@ namespace MethodApp
             {
                 for (int j = i + 1; j < result.Length; j++)
                 {
-                    if (result[i] < result[j])
+                    if (result[i] > result[j])
                     {
                         Local = result[i];
                         result[i] = result[j];
@@ -95,7 +95,7 @@ namespace MethodApp
             }
             foreach (var counted in result)
             {
-                Console.Write(counted + "/");
+                Console.Write("|" + counted + "|");
             }
             return result;
         }
@@ -105,12 +105,8 @@ namespace MethodApp
             var local = array;
             if (sorted)
             {
-                local= SortArray(array);
-            }
-            foreach (var counted in local)
-            {
-                Console.Write(counted + "/");
-            }
+                local = SortArray(array, out var sortedDesc, out var sortedAsc);
+            }                       
         }
 
         static void OperationIn(int[] array, in int data)
@@ -167,7 +163,7 @@ namespace MethodApp
 
             int size = 6;
             var array = GetArrayFromConsole(ref size);
-            ShowArray(array,true);
+            ShowArray(array, false);
 
             var SmalArray = new int[] { 1, 2, 3, 4, 5, 6 };
             var data = 8;
