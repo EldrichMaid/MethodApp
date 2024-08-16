@@ -105,8 +105,12 @@ namespace MethodApp
             var local = array;
             if (sorted)
             {
-                local = SortArray(array, out int[] sorteddesc, out int[] sortedasc);
-            }           
+                local= SortArray(array);
+            }
+            foreach (var counted in local)
+            {
+                Console.Write(counted + "/");
+            }
         }
 
         static void OperationIn(int[] array, in int data)
