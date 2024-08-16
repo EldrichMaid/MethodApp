@@ -136,6 +136,22 @@ namespace MethodApp
                 EchoStatic(phrase, deep - 1);
             }
         }
+        static decimal Factorial(int x)
+        {
+            if (x == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return x * Factorial(x - 1);
+            }
+        }
+        private static int PowerUp(int N, byte pow)
+        {
+            int result = (int)Math.Pow(N, pow);
+            return result;                       
+        }
 
         static void Main(string[] args)
         {
@@ -192,6 +208,7 @@ namespace MethodApp
             var deep = int.Parse(Console.ReadLine());
             EchoStatic(str, deep);
             Echo(str, deep);
+            Console.WriteLine(PowerUp(3, 2));
 
             Console.ReadKey();
         }
