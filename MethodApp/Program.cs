@@ -153,6 +153,7 @@ namespace MethodApp
             return result;
         }
         private static int PowerUpBySwitch(int N, byte pow)
+
         {
             switch (pow)
             {
@@ -165,6 +166,7 @@ namespace MethodApp
                 default:
                     throw new ArgumentException("Invalid power value. Must be a byte between 0 and 255.");
             }
+        }
 
             static void Main(string[] args)
             {
@@ -229,4 +231,4 @@ namespace MethodApp
             }
         }
     }
-}
+
