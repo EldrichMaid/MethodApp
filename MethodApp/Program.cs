@@ -6,7 +6,7 @@ namespace MethodApp
     {
         static string ShowColor(string UserName, int UserAge)
         {
-            Console.WriteLine("{0},{1} лет \n Напишите свой любимый цвет на английском с маленькой буквы",UserName,UserAge);
+            Console.WriteLine("{0},{1} лет \n Напишите свой любимый цвет на английском с маленькой буквы", UserName, UserAge);
             var color = Console.ReadLine();
             switch (color)
             {
@@ -35,7 +35,7 @@ namespace MethodApp
 
                     Console.WriteLine("Your color is yellow!");
                     break;
-                    
+
             }
             return color;
         }
@@ -48,11 +48,11 @@ namespace MethodApp
                 Console.WriteLine("Введите элемент массива номер {0}", i + 1);
                 result[i] = int.Parse(Console.ReadLine());
             }
-                                  
+
             return result;
         }
         static int[] SortArray(in int[] Result, out int[] sorteddesc, out int[] sortedasc)
-        {         
+        {
             sorteddesc = SortArrayDesc(Result);
             sortedasc = SortArrayAsc(Result);
             return Result;
@@ -100,18 +100,18 @@ namespace MethodApp
             return result;
         }
 
-        static void ShowArray(int[] array, bool sorted = false) 
+        static void ShowArray(int[] array, bool sorted = false)
         {
             var local = array;
             if (sorted)
             {
                 local = SortArray(array, out var sortedDesc, out var sortedAsc);
-            }                       
+            }
         }
 
         static void OperationIn(int[] array, in int data)
         {
-            array[0]= data;
+            array[0] = data;
         }
         static void Echo(string saidworld, int deep)
         {
@@ -150,67 +150,83 @@ namespace MethodApp
         private static int PowerUp(int N, byte pow)
         {
             int result = (int)Math.Pow(N, pow);
-            return result;                       
+            return result;
         }
-
-        static void Main(string[] args)
+        private static int PowerUpBySwitch(int N, byte pow)
         {
-            (string name, string[] dishes) User;
-            Console.WriteLine("Введите имя");
-            User.name = Console.ReadLine();
-            User.dishes = new string[5];
-            Console.WriteLine("Введите пять любимых блюд");
-            for (int i = 0; i < User.dishes.Length; i++)
+            switch (pow)
             {
-                User.dishes[i] = Console.ReadLine();
+                case 0:
+                    return 1;
+                case 1:
+                    return N;
+                case > 1:
+                    return N * PowerUp(N, (byte)(pow - 1));
+                default:
+                    throw new ArgumentException("Invalid power value. Must be a byte between 0 and 255.");
             }
 
-            var (name, age) = ("PC", 0);
-            Console.WriteLine("Мое имя: {0}", name);
-            Console.WriteLine("Мой возраст: {0}", age);
-            Console.Write("Введите имя: ");
-            name = Console.ReadLine();
-            Console.Write("Введите возраст с цифрами:");
-            age = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Ваше имя: {0}", name);
-            Console.WriteLine("Ваш возраст: {0}", age);
-
-            (string name,int  age) ColorUser;
-            Console.Write("Введите имя:");
-            ColorUser.name = Console.ReadLine();
-            Console.Write("Введите возраст:");
-            ColorUser.age = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Ваше имя: {0}",ColorUser.name);
-            Console.WriteLine("Ваш возраст: {0}",ColorUser.age);
-            ShowColor(ColorUser.name, ColorUser.age);
-            var favcolors = new string[3];
-            for (int i = 0;i < favcolors.Length;i++)
+            static void Main(string[] args)
             {
-                favcolors[i] = ShowColor(ColorUser.name, ColorUser.age);
+                (string name, string[] dishes) User;
+                Console.WriteLine("Введите имя");
+                User.name = Console.ReadLine();
+                User.dishes = new string[5];
+                Console.WriteLine("Введите пять любимых блюд");
+                for (int i = 0; i < User.dishes.Length; i++)
+                {
+                    User.dishes[i] = Console.ReadLine();
+                }
+
+                var (name, age) = ("PC", 0);
+                Console.WriteLine("Мое имя: {0}", name);
+                Console.WriteLine("Мой возраст: {0}", age);
+                Console.Write("Введите имя: ");
+                name = Console.ReadLine();
+                Console.Write("Введите возраст с цифрами:");
+                age = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Ваше имя: {0}", name);
+                Console.WriteLine("Ваш возраст: {0}", age);
+
+                (string name, int age) ColorUser;
+                Console.Write("Введите имя:");
+                ColorUser.name = Console.ReadLine();
+                Console.Write("Введите возраст:");
+                ColorUser.age = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Ваше имя: {0}", ColorUser.name);
+                Console.WriteLine("Ваш возраст: {0}", ColorUser.age);
+                ShowColor(ColorUser.name, ColorUser.age);
+                var favcolors = new string[3];
+                for (int i = 0; i < favcolors.Length; i++)
+                {
+                    favcolors[i] = ShowColor(ColorUser.name, ColorUser.age);
+                }
+                Console.WriteLine("Ваши любимые цвета");
+                foreach (var color in favcolors)
+                {
+                    Console.WriteLine(color);
+                }
+
+                int size = 6;
+                var array = GetArrayFromConsole(ref size);
+                ShowArray(array, false);
+
+                var SmalArray = new int[] { 1, 2, 3, 4, 5, 6 };
+                var data = 8;
+                OperationIn(SmalArray, data);
+
+                Console.WriteLine("Напишите что-то");
+                var str = Console.ReadLine();
+                Console.WriteLine("Укажите глубину эха");
+                var deep = int.Parse(Console.ReadLine());
+                EchoStatic(str, deep);
+                Echo(str, deep);
+
+                Console.WriteLine(PowerUp(3, 2));
+                Console.WriteLine(PowerUpBySwitch(3, 3));
+
+                Console.ReadKey();
             }
-            Console.WriteLine("Ваши любимые цвета");
-            foreach (var color in favcolors)
-            {
-                Console.WriteLine(color);
-            }
-
-            int size = 6;
-            var array = GetArrayFromConsole(ref size);
-            ShowArray(array, false);
-
-            var SmalArray = new int[] { 1, 2, 3, 4, 5, 6 };
-            var data = 8;
-            OperationIn(SmalArray, data);
-
-            Console.WriteLine("Напишите что-то");
-            var str = Console.ReadLine();
-            Console.WriteLine("Укажите глубину эха");
-            var deep = int.Parse(Console.ReadLine());
-            EchoStatic(str, deep);
-            Echo(str, deep);
-            Console.WriteLine(PowerUp(3, 2));
-
-            Console.ReadKey();
         }
     }
 }
