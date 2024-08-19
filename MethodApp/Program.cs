@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata;
+﻿using Microsoft.VisualBasic;
+using System.Reflection.Metadata;
 
 namespace MethodApp
 {
@@ -160,9 +161,94 @@ namespace MethodApp
                 case 1:
                     return N;
                 case > 1:
-                    return N * PowerUp(N, (byte)(pow - 1));
+                    return N * PowerUpBySwitch(N, (byte)(pow - 1));
                 default:
                     throw new ArgumentException("Invalid power value. Must be a byte between 0 and 255.");
+            }
+        }
+        public static (string, string, byte, bool, int, string[], byte, string[]) CreateNameData()
+        {
+            Console.Write("Enter name: ");
+            string name = Console.ReadLine();
+            Console.Write("Enter last name: ");
+            string lastname = Console.ReadLine();
+            Console.Write("Enter age: ");
+            byte age = byte.Parse(Console.ReadLine());
+            Console.Write("Enter if you have pets (true/false): ");
+            bool pethaver = bool.Parse(Console.ReadLine());
+            Console.Write("Enter number of pets: ");
+            int petamount = int.Parse(Console.ReadLine());
+            Console.Write("Enter pet names (comma-separated): ");
+            string[] petnames = Console.ReadLine().Split(',');
+            Console.Write("Enter number of favorite colors: ");
+            byte favcolorsamt = byte.Parse(Console.ReadLine());
+            Console.Write("Enter favorite colors (comma-separated): ");
+            string[] favcolorsnames = Console.ReadLine().Split(',');
+            return (name, lastname, age, pethaver, petamount, petnames, favcolorsamt, favcolorsnames);
+        }
+        public static (string, string, byte, bool, int, string[], byte, string[]) CheckAndCorrectData((string, string, byte, bool, int, string[], byte, string[]) nameData)
+        {
+            (string name, string lastname, byte age, bool pethaver, int petamount, string[] petnames, byte favcolorsamt, string[] favcolorsnames) = nameData;
+            while (age < 1)
+            {
+                Console.WriteLine("Age must be at least 1. Please try again.");
+                Console.Write("Enter age: ");
+                if (!byte.TryParse(Console.ReadLine(), out age))
+                {
+                    Console.WriteLine("Invalid age format. Please enter a number.");
+                }
+            }
+            while (petamount < 0)
+            {
+                Console.WriteLine("Number of pets cannot be negative. Please try again.");
+                Console.Write("Enter number of pets: ");
+                if (!int.TryParse(Console.ReadLine(), out petamount))
+                {
+                    Console.WriteLine("Invalid input. Please enter a number.");
+                }
+            }
+            while (favcolorsamt < 0)
+            {
+                Console.WriteLine("Number of favorite colors cannot be negative. Please try again.");
+                Console.Write("Enter number of favorite colors: ");
+                if (!byte.TryParse(Console.ReadLine(), out favcolorsamt))
+                {
+                    Console.WriteLine("Invalid input. Please enter a number.");
+                }
+            }
+            return (name, lastname, age, pethaver, petamount, petnames, favcolorsamt, favcolorsnames);
+        }
+        public static void DisplayNameData((string, string, byte, bool, int, string[], byte, string[]) nameData)
+        {
+            (string name, string lastname, byte age, bool pethaver, int petamount, string[] petnames, byte favcolorsamt, string[] favcolorsnames) = nameData;
+            Console.WriteLine($"Name: {name} {lastname}");
+            Console.WriteLine($"Age: {age}");
+            Console.WriteLine($"Pet Owner: {pethaver}");
+            Console.WriteLine($"Number of Pets: {petamount}");
+            Console.WriteLine("Pet Names:");
+            if (petnames.Length > 0)
+            {
+                foreach (string petname in petnames)
+                {
+                    Console.WriteLine($"- {petname}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("- None");
+            }
+            Console.WriteLine($"Number of Favorite Colors: {favcolorsamt}");
+            Console.WriteLine("Favorite Colors:");
+            if (favcolorsnames.Length > 0)
+            {
+                foreach (string color in favcolorsnames)
+                {
+                    Console.WriteLine($"- {color}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("- None");
             }
         }
         static void Main(string[] args)
@@ -223,8 +309,12 @@ namespace MethodApp
 
                 Console.WriteLine(PowerUp(3, 2));
                 Console.WriteLine(PowerUpBySwitch(3, 3));
+            
+            (string name, string lastname, byte age, bool pethaver, int petamount, string[] petnames, byte favcolorsamt, string[] favcolorsnames) personData = CreateNameData();
+            personData = CheckAndCorrectData(personData);
+            DisplayNameData(personData);
 
-                Console.ReadKey();
+            Console.ReadKey();
             }
         }
     }
